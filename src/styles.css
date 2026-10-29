@@ -1,0 +1,749 @@
+:root {
+  --theme-color: #000;
+}
+
+::selection {
+  background-color: var(--theme-color);
+  color: white;
+}
+
+body {
+  /* font-family: Arial, sans-serif; */
+  margin: 0;
+}
+
+h1, h2, h3 {
+  margin: 8px 0;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  padding: 4px 8px;
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  color: #888;
+  border-color: #888;
+  cursor: not-allowed;
+}
+
+/* Login, register and onboarding */
+.auth-box {
+  max-width: 460px;
+  margin: 40px auto;
+  padding: 16px;
+}
+
+/* Sidebar layout */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  padding: 16px;
+  border-right: 1px solid #000;
+  box-sizing: border-box;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+
+.sidebar li {
+  margin-bottom: 4px;
+}
+
+.sidebar li button {
+  width: 100%;
+  text-align: left;
+}
+
+.sidebar li button.active {
+  background: #000;
+  color: #fff;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+  min-width: 0;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 8px;
+  max-width: 520px;
+  margin-bottom: 16px;
+}
+
+form label {
+  align-self: center;
+}
+
+/* Rows of the generic CRUD form keep the same two-column grid */
+form .row {
+  display: contents;
+}
+
+form .actions {
+  grid-column: 2;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 8px 0;
+}
+
+th, td {
+  border: 1px solid #000;
+  padding: 4px 8px;
+  text-align: left;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.message {
+  padding: 6px 8px;
+  border: 1px solid #000;
+  margin: 8px 0;
+}
+
+.pager {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.icon-actions {
+  display: flex;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border:none;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Dialog for the create/edit form */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.modal {
+  background: #fff;
+  border: 1px solid #000;
+  padding: 16px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.modal form {
+  margin-bottom: 0;
+}
+
+pre {
+  border: 1px solid #000;
+  padding: 8px;
+  overflow: auto;
+}
+
+/* Responsive */
+img, svg {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #000;
+    padding: 12px;
+  }
+
+  .sidebar ul {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 8px 0;
+  }
+
+  .sidebar li {
+    margin-bottom: 0;
+    flex: 1 1 auto;
+  }
+
+  .sidebar li button {
+    text-align: center;
+  }
+
+  .content {
+    padding: 12px;
+  }
+
+  /* One column forms: label above field */
+  form {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  form .actions {
+    grid-column: 1;
+  }
+
+  /* Filters take the full row width */
+  .filters > input,
+  .filters > select {
+    flex: 1 1 140px;
+    min-width: 0;
+  }
+
+  /* Wide tables scroll sideways instead of breaking the page */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .pager {
+    flex-wrap: wrap;
+  }
+
+  .modal {
+    width: 94%;
+    padding: 12px;
+  }
+
+  .auth-box {
+    margin: 16px auto;
+  }
+}
+
+/* Hover effects */
+button {
+  transition: background-color 0.15s, color 0.15s;
+}
+
+button:hover:not(:disabled) {
+  background: var(--theme-color);
+  color: #fff;
+}
+
+input:hover:not(:disabled),
+select:hover:not(:disabled) {
+  background: #f2f2f2;
+}
+
+tbody tr:hover {
+  background: #f2f2f2;
+}
+
+.modal-backdrop {
+  cursor: default;
+}
+
+/* Success notice, top right, auto-dismissed */
+.toast {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid #000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.toast button {
+  padding: 0 6px;
+  line-height: 1.2;
+}
+
+/* Password field with show/hide eye */
+.password-field {
+  position: relative;
+  display: flex;
+}
+
+.password-field input {
+  flex: 1;
+  min-width: 0;
+  padding-right: 36px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: none;
+  background: transparent;
+}
+
+.password-toggle:hover:not(:disabled) {
+  background: transparent;
+  color: #000;
+  opacity: 0.6;
+}
+
+/* Product form page: image card on the left, detail fields in a grid on the right */
+.product-form {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: 16px;
+  align-items: start;
+  max-width: 1000px;
+  margin-bottom: 16px;
+}
+
+.form-card {
+  border: 1px solid #000;
+  padding: 12px 16px 16px;
+  min-width: 0;
+}
+
+.form-card h3 {
+  margin-top: 0;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.field.span-2 {
+  grid-column: span 2;
+}
+
+.field input:not([type="radio"]),
+.field select,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.radio-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  min-height: 30px;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+}
+
+.dropzone {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #000;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: center;
+}
+
+.dropzone:hover,
+.dropzone.dragging {
+  border-style: solid;
+  background: #f2f2f2;
+}
+
+.dropzone img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.dropzone-hint {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+}
+
+.dropzone-busy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.dropzone-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .product-form {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field.span-2 {
+    grid-column: auto;
+  }
+
+  .dropzone {
+    max-width: 320px;
+  }
+}
+
+/* Product form page tweaks: left-aligned labels, equal-height cards */
+.product-form {
+  align-items: stretch;
+}
+
+.field > label {
+  align-self: flex-start;
+}
+
+/* Product detail page (reuses .product-form / .form-card from the form page) */
+.detail-image {
+  cursor: default;
+}
+
+.detail-image:hover {
+  border-style: dashed;
+  background: transparent;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+  margin: 0;
+}
+
+.detail-item {
+  min-width: 0;
+}
+
+.detail-item.span-2 {
+  grid-column: span 2;
+}
+
+.detail-item dt {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.detail-item dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-item.span-2 {
+    grid-column: auto;
+  }
+}
+
+.page-header .icon-actions {
+  gap: 8px;
+}
+
+/* Product detail page: gallery | info | side box */
+.pd-back {
+  margin-bottom: 12px;
+}
+
+.pd-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) 260px;
+  gap: 24px;
+  align-items: start;
+}
+
+.pd-gallery {
+  display: flex;
+  gap: 12px;
+  min-width: 0;
+}
+
+.pd-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pd-thumb {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  overflow: hidden;
+}
+
+.pd-thumb.active {
+  border-width: 2px;
+}
+
+.pd-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pd-main-image {
+  flex: 1;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  overflow: hidden;
+}
+
+.pd-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pd-info {
+  min-width: 0;
+}
+
+.pd-info hr {
+  border: none;
+  border-top: 1px solid #000;
+  margin: 12px 0;
+}
+
+.pd-title {
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 6px;
+  overflow-wrap: anywhere;
+}
+
+.pd-sub,
+.pd-note {
+  font-size: 13px;
+}
+
+.pd-price {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.pd-specs {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pd-specs th,
+.pd-specs td {
+  border: none;
+  padding: 4px 8px 4px 0;
+  vertical-align: top;
+}
+
+.pd-specs th {
+  width: 120px;
+}
+
+.pd-about {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.pd-about li {
+  margin-bottom: 6px;
+}
+
+.pd-box {
+  border: 1px solid #000;
+  padding: 16px;
+}
+
+.pd-box-price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pd-stock {
+  margin: 8px 0 12px;
+  font-weight: bold;
+}
+
+.pd-stock.off {
+  text-decoration: line-through;
+}
+
+.pd-box-button {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+}
+
+.pd-meta {
+  margin: 12px 0 0;
+  font-size: 13px;
+}
+
+.pd-meta dt {
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.pd-meta dd {
+  margin: 0;
+}
+
+@media (max-width: 1100px) {
+  .pd-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .pd-box {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .pd-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-gallery {
+    flex-direction: column-reverse;
+  }
+
+  .pd-thumbs {
+    flex-direction: row;
+  }
+}
+
+/* Movies grid: title in the middle of the poster, release date along the bottom. */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.movie-card {
+  padding: 8px;
+}
+
+.poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background: #333;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.poster img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster h4 {
+  position: relative;
+  margin: 0;
+  font-size: 16px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.poster small {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+}
